@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  --font-display: 'Outfit', 'Inter', sans-serif;
+
+  --color-background-light: #F8FAFC;
+  --color-background-dark: #0B0F19;
+
+  --color-surface-light: #FFFFFF;
+  --color-surface-dark: #111827;
+  --color-surface-hover-light: #F1F5F9;
+  --color-surface-hover-dark: #1F2937;
+
+  --color-ink-light: #0F172A;
+  --color-ink-dark: #F9FAFB;
+  --color-ink-muted-light: #334155;
+  --color-ink-muted-dark: #9CA3AF;
+
+  --color-quantum-theoretical: #4F46E5;
+  --color-quantum-theoretical-light: #818CF8;
+  --color-quantum-simulated: #0D9488;
+  --color-quantum-simulated-light: #2DD4BF;
+  --color-quantum-marked: #D97706;
+  --color-quantum-marked-light: #FBBF24;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+  }
+
+  body {
+    background-color: #F8FAFC;
+    color: #0F172A;
+    transition: color 200ms ease, background-color 200ms ease;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html.dark body {
+    background-color: #0B0F19;
+    color: #F9FAFB;
+  }
+}
+
+/* Glassmorphism & Surface Utilities */
+.quantum-card {
+  border-radius: 1rem;
+  transition: all 200ms ease;
+}
+
+.quantum-code-block {
+  font-family: var(--font-mono);
+  background-color: #030712;
+  color: #F9FAFB;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #1F2937;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: none;
+  ring: 2px solid #6366F1;
+}
