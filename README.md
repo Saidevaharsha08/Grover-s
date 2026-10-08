@@ -109,13 +109,14 @@ python/venv/Scripts/python python/run_experiments.py
 
 ## 🧮 Search Difficulty Score (SDS) Module
 
-The **Search Difficulty Score (SDS)** quantifies the overall difficulty of running Grover's algorithm on a specific configuration:
+The **Search Difficulty Score (SDS)** quantifies the overall difficulty of executing Grover's algorithm on a given quantum configuration:
 
 $$\text{SDS} = w_1 \cdot n_{\text{norm}} + w_2 \cdot \left(\frac{N}{M}\right)_{\text{norm}} + w_3 \cdot \text{noise}_{\text{norm}}$$
 
-- $n_{\text{norm}}$: Normalized qubit count ($n / n_{\max}$)
-- $(N/M)_{\text{norm}}$: Normalized search space ratio ($N/M / (N/M)_{\max}$)
-- $\text{noise}_{\text{norm}}$: Normalized observed probability degradation ($\Delta P = P_{\text{ideal}} - P_{\text{noisy}}$)
+### Formula Variables:
+- **Normalized Qubit Count**: $n_{\text{norm}} = \frac{n}{n_{\max}}$
+- **Normalized Search Space Ratio**: $\left(\frac{N}{M}\right)_{\text{norm}} = \frac{N/M}{(N/M)_{\max}}$
+- **Normalized Noise Degradation**: $\text{noise}_{\text{norm}} = \frac{\Delta P}{\Delta P_{\max}} \quad \text{where} \quad \Delta P = P_{\text{ideal}} - P_{\text{noisy}}$
 - **Calibrated Weights**: $w_1 = 0.35$, $w_2 = 0.35$, $w_3 = 0.30$
 
 ### Spearman Rank Correlation Validation
