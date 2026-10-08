@@ -7,24 +7,14 @@ export interface IGroverApi {
 }
 
 class GroverApiClient implements IGroverApi {
-  private simulatedLatencyMs: number = 180;
-
   public async executeExperiment(config: GroverExperimentConfig): Promise<GroverExperimentResult> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const result = runGroverSimulation(config);
-        resolve(result);
-      }, this.simulatedLatencyMs);
-    });
+    // Instantaneous client-side computation without artificial setTimeout latency
+    return runGroverSimulation(config);
   }
 
   public async getBenchmarkSuite(): Promise<BenchmarkRow[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const benchmarks = generateBenchmarkSuite();
-        resolve(benchmarks);
-      }, 50);
-    });
+    // Instantaneous benchmark data retrieval
+    return generateBenchmarkSuite();
   }
 }
 

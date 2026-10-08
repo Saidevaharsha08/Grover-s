@@ -34,7 +34,7 @@ export const KeyFindings: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-4 pt-4">
+    <div className="space-y-6 pt-4">
       <div className="flex items-center space-x-2">
         <Lightbulb className="w-5 h-5 text-quantum-theoretical" />
         <h3 className="font-display font-bold text-xl text-ink-light dark:text-ink-dark">
@@ -64,6 +64,52 @@ export const KeyFindings: React.FC = () => {
             </div>
           );
         })}
+      </div>
+
+      {/* Real Qiskit Suite & SDS Results Notice */}
+      <div className="quantum-card p-6 bg-slate-900 text-slate-100 border border-slate-800 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+          <div>
+            <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">
+              Standalone Python Qiskit 1.x Engine Active
+            </span>
+            <h4 className="font-display font-bold text-base text-white mt-1">
+              Real Qiskit Execution, Noisy Aer & SDS Benchmark Outputs
+            </h4>
+          </div>
+          <div className="flex items-center gap-2">
+            <a
+              href="/results/grover_benchmark_results.csv"
+              download
+              className="px-3 py-1.5 rounded-lg bg-quantum-theoretical/20 hover:bg-quantum-theoretical/30 text-quantum-theoreticalLight border border-quantum-theoretical/40 text-xs font-mono font-semibold transition-colors"
+            >
+              Download Benchmark CSV
+            </a>
+          </div>
+        </div>
+
+        <p className="text-xs font-mono text-slate-300 leading-relaxed">
+          <strong>Architecture Note:</strong> This web application serves as a real-time interactive results visualizer. Real Qiskit circuits, physical noise models (<code className="text-quantum-simulatedLight">qiskit_aer.noise.NoiseModel</code>), IBM Quantum QPU submissions (<code className="text-amber-400">qiskit-ibm-runtime</code>), and Search Difficulty Scores (<code className="text-emerald-400">SDS</code>) are computed by the standalone Python suite located in <code className="text-slate-200 bg-slate-800 px-1 py-0.5 rounded">python/run_experiments.py</code>.
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          <div className="space-y-1">
+            <span className="text-[11px] font-mono text-slate-400 block">Iteration Sweep P(k) Plot</span>
+            <img
+              src="/results/success_prob_vs_iterations.png"
+              alt="Success Probability vs Iterations"
+              className="rounded-lg border border-slate-700 w-full h-36 object-cover bg-slate-950"
+            />
+          </div>
+          <div className="space-y-1">
+            <span className="text-[11px] font-mono text-slate-400 block">SDS Score vs Degradation Scatter Plot</span>
+            <img
+              src="/results/sds_vs_degradation.png"
+              alt="SDS vs Degradation Correlation"
+              className="rounded-lg border border-slate-700 w-full h-36 object-cover bg-slate-950"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

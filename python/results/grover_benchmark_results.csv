@@ -1,0 +1,7 @@
+qubits,N,M,target_states,optimal_iterations,ideal_success_prob,noisy_success_prob,hardware_success_prob,circuit_depth,n_norm,nm_norm,noise_norm,actual_degradation,sds_score
+2,4,1,11,1,1.0,0.9092,N/A (Token Req),4,0.0,0.143,0.124,0.0908,0.0872
+2,4,2,"01, 11",1,0.4941,0.4961,N/A (Token Req),4,0.0,0.0,0.0,0.0,0.0
+3,8,1,101,2,0.9395,0.5781,N/A (Token Req),6,0.5,0.429,0.526,0.3847,0.4827
+3,8,2,"011, 111",1,1.0,0.7344,N/A (Token Req),4,0.5,0.143,0.363,0.2656,0.3339
+4,16,1,1101,3,0.9648,0.2588,N/A (Token Req),8,1.0,1.0,1.0,0.7318,1.0
+4,16,2,"1001, 1111",2,0.9478,0.3003,N/A (Token Req),6,1.0,0.429,0.934,0.6832,0.7801
