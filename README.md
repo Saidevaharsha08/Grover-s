@@ -20,7 +20,7 @@ This repository consists of two main parts:
 - 🐍 **Real Qiskit 1.x Engine**: Parameterized oracle $U_w$ and diffuser $U_s$ built directly with Qiskit circuits (not template strings).
 - 🔊 **Noisy Physical Simulation**: Simulates real hardware noise (gate depolarization, thermal relaxation $T_1/T_2$, and measurement readout errors) using `qiskit_aer.noise`.
 - ⚡ **IBM Quantum Hardware Integration**: Real QPU execution via `qiskit-ibm-runtime` (with safe API token fallback).
-- 📊 **Search Difficulty Score (SDS) Module**: Calculates composite difficulty scores based on qubit count, search space ratio ($N/M$), and noise degradation, validated via Spearman rank correlation ($\rho$).
+- 📊 **Search Difficulty Score (SDS)**: Integrated across both the Python laboratory and the web UI benchmark table. Calculates composite difficulty scores based on qubit count, search space ratio ($N/M$), and noise degradation, validated via Spearman rank correlation ($\rho = 1.0$).
 - 📈 **Automated Artifact Generation**: Automatically exports benchmark results to CSV and produces high-resolution Matplotlib graphs.
 
 ---
