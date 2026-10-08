@@ -95,19 +95,23 @@ export const KeyFindings: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
           <div className="space-y-1">
             <span className="text-[11px] font-mono text-slate-400 block">Iteration Sweep P(k) Plot</span>
-            <img
-              src="/results/success_prob_vs_iterations.png"
-              alt="Success Probability vs Iterations"
-              className="rounded-lg border border-slate-700 w-full h-36 object-cover bg-slate-950"
-            />
+            <a href="/results/success_prob_vs_iterations.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="/results/success_prob_vs_iterations.png"
+                alt="Success Probability vs Iterations"
+                className="rounded-lg border border-slate-700 w-full h-52 sm:h-64 object-contain bg-slate-950/90 p-1 hover:border-quantum-simulated transition-colors"
+              />
+            </a>
           </div>
           <div className="space-y-1">
             <span className="text-[11px] font-mono text-slate-400 block">SDS Score vs Degradation Scatter Plot</span>
-            <img
-              src="/results/sds_vs_degradation.png"
-              alt="SDS vs Degradation Correlation"
-              className="rounded-lg border border-slate-700 w-full h-36 object-cover bg-slate-950"
-            />
+            <a href="/results/sds_vs_degradation.png" target="_blank" rel="noopener noreferrer">
+              <img
+                src="/results/sds_vs_degradation.png"
+                alt="SDS vs Degradation Correlation"
+                className="rounded-lg border border-slate-700 w-full h-52 sm:h-64 object-contain bg-slate-950/90 p-1 hover:border-quantum-theoretical transition-colors"
+              />
+            </a>
           </div>
         </div>
       </div>

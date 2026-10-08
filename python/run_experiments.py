@@ -165,8 +165,8 @@ def generate_plots(sweep_data: Dict, sds_results: List[Dict], tuning_report: Dic
     ax.grid(True, linestyle='--', alpha=0.5)
     
     plt.tight_layout()
-    plt.savefig("python/results/success_prob_vs_iterations.png")
-    plt.savefig("public/results/success_prob_vs_iterations.png")
+    plt.savefig("python/results/success_prob_vs_iterations.png", bbox_inches='tight', pad_inches=0.1)
+    plt.savefig("public/results/success_prob_vs_iterations.png", bbox_inches='tight', pad_inches=0.1)
     plt.close()
     
     # -------------------------------------------------------------
@@ -204,8 +204,8 @@ def generate_plots(sweep_data: Dict, sds_results: List[Dict], tuning_report: Dic
     ax.grid(True, linestyle='--', alpha=0.5)
     
     plt.tight_layout()
-    plt.savefig("python/results/sds_vs_degradation.png")
-    plt.savefig("public/results/sds_vs_degradation.png")
+    plt.savefig("python/results/sds_vs_degradation.png", bbox_inches='tight', pad_inches=0.1)
+    plt.savefig("public/results/sds_vs_degradation.png", bbox_inches='tight', pad_inches=0.1)
     plt.close()
     
     print("  - Saved plot: success_prob_vs_iterations.png")
