@@ -14,13 +14,22 @@ export const AmplitudeEvolution: React.FC = () => {
   const steps = result.stepEvolutions;
   const currentStep = steps[Math.min(selectedStepIdx, steps.length - 1)];
 
-  const chartData = currentStep.amplitudes.map((st) => ({
+  let chartData = currentStep.amplitudes.map((st) => ({
     label: st.label,
     amplitude: st.amplitude,
     probabilityPct: Math.round(st.probability * 1000) / 10,
     isTarget: st.isTarget,
     phaseDeg: st.phaseDeg,
   }));
+
+  if (chartData.length > 8) {
+    const marked = chartData.filter((d) => d.isTarget);
+    const nonMarked = chartData
+      .filter((d) => !d.isTarget)
+      .sort((a, b) => Math.abs(b.amplitude) - Math.abs(a.amplitude))
+      .slice(0, 8 - marked.length);
+    chartData = [...marked, ...nonMarked].sort((a, b) => a.label.localeCompare(b.label));
+  }
 
   return (
     <div className="quantum-card p-6 space-y-4 bg-white dark:bg-surface-dark border-slate-200 dark:border-slate-800">

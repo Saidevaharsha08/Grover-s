@@ -8,12 +8,23 @@ export const SimulationDashboard: React.FC = () => {
 
   if (!result) return null;
 
-  const chartData = result.simulatedDistribution.map((st) => ({
+  // Keep marked states + top states if state count is large
+  const allStates = result.simulatedDistribution;
+  let chartData = allStates.map((st) => ({
     label: `|${st.binary}⟩`,
     count: st.count,
     probPct: Math.round(st.prob * 1000) / 10,
     isTarget: st.isTarget,
   }));
+
+  if (chartData.length > 8) {
+    const marked = chartData.filter((d) => d.isTarget);
+    const nonMarked = chartData
+      .filter((d) => !d.isTarget)
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 8 - marked.length);
+    chartData = [...marked, ...nonMarked].sort((a, b) => a.label.localeCompare(b.label));
+  }
 
   const empiricalPct = Math.round(result.empiricalSuccessRate * 1000) / 10;
   const theoreticalPct = Math.round(result.theoreticalProb * 1000) / 10;
@@ -53,7 +64,7 @@ export const SimulationDashboard: React.FC = () => {
         {/* Empirical Success Rate */}
         <div className="bg-slate-50 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-100 dark:border-slate-800 space-y-1">
           <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
-            <span>EMPIRICAL SUCCESS RATE</span>
+            <span>SUCCESS RATE</span>
             <CheckCircle2 className="w-4 h-4 text-quantum-simulated" />
           </div>
           <div className="flex items-baseline space-x-2">
@@ -61,11 +72,11 @@ export const SimulationDashboard: React.FC = () => {
               {empiricalPct}%
             </span>
             <span className="text-xs font-mono text-slate-500">
-              vs {theoreticalPct}% theory
+              (Theory: {theoreticalPct}%)
             </span>
           </div>
           <p className="text-[11px] font-mono text-slate-400 pt-1">
-            Delta: {deltaPct >= 0 ? `+${deltaPct}` : deltaPct}% (Sampling deviation)
+            Delta: {deltaPct >= 0 ? `+${deltaPct}` : deltaPct}%
           </p>
         </div>
 
@@ -81,23 +92,23 @@ export const SimulationDashboard: React.FC = () => {
             </span>
           </div>
           <p className="text-[11px] font-mono text-slate-400 pt-1">
-            Highest probability measurement candidate
+            Highest candidate
           </p>
         </div>
 
         {/* State Vector Fidelity */}
         <div className="bg-slate-50 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-100 dark:border-slate-800 space-y-1">
           <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
-            <span>STATE VECTOR FIDELITY</span>
+            <span>STATE FIDELITY</span>
             <ShieldCheck className="w-4 h-4 text-emerald-500" />
           </div>
           <div className="flex items-baseline space-x-2">
             <span className="font-mono text-2xl font-extrabold text-emerald-600 dark:text-emerald-400">
-              {(result.fidelityScore * 100).toFixed(2)}%
+              {(result.fidelityScore * 100).toFixed(1)}%
             </span>
           </div>
           <p className="text-[11px] font-mono text-slate-400 pt-1">
-            Bhattacharyya quantum state overlap
+            Bhattacharyya state overlap
           </p>
         </div>
 
@@ -117,12 +128,12 @@ export const SimulationDashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="h-60 w-full pt-1">
+        <div className="h-56 w-full pt-1">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData} margin={{ top: 10, right: 15, left: -15, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" opacity={0.15} stroke="currentColor" />
               <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#94A3B8' }} />
-              <YAxis tick={{ fontSize: 11, fill: '#94A3B8' }} label={{ value: 'Shot Counts', angle: -90, position: 'insideLeft', offset: 10, fill: '#94A3B8', fontSize: 11 }} />
+              <YAxis tick={{ fontSize: 11, fill: '#94A3B8' }} label={{ value: 'Shots', angle: -90, position: 'insideLeft', offset: 10, fill: '#94A3B8', fontSize: 11 }} />
               <Tooltip
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
@@ -130,9 +141,9 @@ export const SimulationDashboard: React.FC = () => {
                     return (
                       <div className="bg-slate-900 text-slate-100 p-2.5 rounded-xl border border-slate-700 shadow-md text-xs font-mono">
                         <p className="font-bold text-white">{data.label}</p>
-                        <p className="text-slate-300">Shots Measured: <strong>{data.count}</strong> / {config.shots}</p>
-                        <p className="text-slate-300">Empirical Ratio: <strong>{data.probPct}%</strong></p>
-                        {data.isTarget && <p className="text-amber-400 font-bold">★ Marked Target State</p>}
+                        <p className="text-slate-300">Shots: <strong>{data.count}</strong> / {config.shots}</p>
+                        <p className="text-slate-300">Ratio: <strong>{data.probPct}%</strong></p>
+                        {data.isTarget && <p className="text-amber-400 font-bold">★ Marked Target</p>}
                       </div>
                     );
                   }

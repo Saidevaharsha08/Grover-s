@@ -125,7 +125,7 @@ export const BenchmarkTable: React.FC = () => {
                   <ArrowUpDown className="w-3 h-3 opacity-60" />
                 </div>
               </th>
-              <th className="py-2.5 px-3">Search Space N</th>
+              <th className="py-2.5 px-3">Space N</th>
               <th className="py-2.5 px-3 cursor-pointer hover:text-slate-200" onClick={() => handleSort('markedCount')}>
                 <div className="flex items-center gap-1">
                   <span>Marked (M)</span>
@@ -133,7 +133,6 @@ export const BenchmarkTable: React.FC = () => {
                 </div>
               </th>
               <th className="py-2.5 px-3">Targets</th>
-              <th className="py-2.5 px-3">Theta θ</th>
               <th className="py-2.5 px-3 cursor-pointer hover:text-slate-200" onClick={() => handleSort('optimalIterations')}>
                 <div className="flex items-center gap-1">
                   <span>Optimal k</span>
@@ -141,7 +140,6 @@ export const BenchmarkTable: React.FC = () => {
                 </div>
               </th>
               <th className="py-2.5 px-3">Max P(k)</th>
-              <th className="py-2.5 px-3">Classical Queries</th>
               <th className="py-2.5 px-3 cursor-pointer hover:text-slate-200" onClick={() => handleSort('speedupFactor')}>
                 <div className="flex items-center gap-1">
                   <span>Speedup</span>
@@ -157,10 +155,8 @@ export const BenchmarkTable: React.FC = () => {
                 <td className="py-2.5 px-3 font-semibold text-slate-700 dark:text-slate-300">N = {row.totalStates}</td>
                 <td className="py-2.5 px-3 font-semibold text-quantum-marked dark:text-quantum-markedLight">M = {row.markedCount}</td>
                 <td className="py-2.5 px-3 text-slate-600 dark:text-slate-400">{row.targetStatesStr}</td>
-                <td className="py-2.5 px-3 text-slate-500">{row.thetaRad} rad</td>
                 <td className="py-2.5 px-3 font-bold text-emerald-600 dark:text-emerald-400">k = {row.optimalIterations}</td>
                 <td className="py-2.5 px-3 font-semibold text-slate-800 dark:text-slate-200">{(row.theoreticalMaxProb * 100).toFixed(1)}%</td>
-                <td className="py-2.5 px-3 text-slate-500">{row.classicalAvgQueries} queries</td>
                 <td className="py-2.5 px-3">
                   <span className="px-2 py-0.5 rounded bg-quantum-simulated/15 text-quantum-simulated dark:text-quantum-simulatedLight font-bold">
                     {row.speedupFactor}x

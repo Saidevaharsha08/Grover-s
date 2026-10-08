@@ -11,6 +11,7 @@ import {
   ReferenceLine
 } from 'recharts';
 import { TrendingUp, Sparkles } from 'lucide-react';
+import { MathView } from '../common/MathView';
 
 export const ProbabilityChart: React.FC = () => {
   const { result, config } = useExperiment();
@@ -127,9 +128,15 @@ export const ProbabilityChart: React.FC = () => {
         </ResponsiveContainer>
       </div>
 
-      <div className="text-[11px] font-mono text-slate-400 flex flex-wrap justify-between items-center pt-2 border-t border-slate-100 dark:border-slate-800">
-        <span>Formula: P(k) = sin²((2k + 1) θ / 2)</span>
-        <span>Angle θ = {result.theta.toFixed(4)} rad ({(result.theta * 180 / Math.PI).toFixed(1)}°)</span>
+      <div className="text-xs font-mono text-slate-400 flex flex-wrap justify-between items-center pt-2 border-t border-slate-100 dark:border-slate-800 gap-2">
+        <div className="flex items-center gap-1.5">
+          <span className="text-slate-500">Formula:</span>
+          <MathView math="P(k) = \sin^2\left(\frac{(2k + 1)\theta}{2}\right)" className="text-quantum-theoreticalLight font-semibold" />
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="text-slate-500">Angle:</span>
+          <MathView math={`\\theta = 2 \\arcsin\\left(\\sqrt{\\frac{M}{N}}\\right) = ${result.theta.toFixed(4)}\\text{ rad}`} className="text-slate-300 font-semibold" />
+        </div>
       </div>
     </div>
   );

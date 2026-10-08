@@ -1,6 +1,7 @@
 import React from 'react';
 import { useExperiment } from '../../context/ExperimentContext';
 import { Compass } from 'lucide-react';
+import { MathView } from '../common/MathView';
 
 export const GeometricRotation2D: React.FC = () => {
   const { result, config } = useExperiment();
@@ -34,14 +35,20 @@ export const GeometricRotation2D: React.FC = () => {
             2D Geometric Subspace State Rotation
           </h3>
         </div>
-        <span className="text-xs font-mono text-slate-400">
-          Subspace: Span(|w^⊥⟩, |w⟩)
-        </span>
+        <div className="text-xs font-mono text-slate-400 flex items-center gap-1">
+          <span>Subspace:</span>
+          <MathView math="\text{Span}(|w^\perp\rangle, |w\rangle)" />
+        </div>
       </div>
 
-      <p className="text-xs text-ink-mutedLight dark:text-ink-mutedDark font-mono">
-        Each Grover iteration rotates state vector |s_k⟩ counterclockwise towards target subspace |w⟩ by angle θ = {(theta * 180 / Math.PI).toFixed(1)}°.
-      </p>
+      <div className="text-xs text-ink-mutedLight dark:text-ink-mutedDark font-mono flex items-center gap-1.5 flex-wrap">
+        <span>Grover operator rotates state vector</span>
+        <MathView math="|s_k\rangle" className="text-quantum-theoreticalLight font-bold" />
+        <span>counterclockwise towards target subspace</span>
+        <MathView math="|w\rangle" className="text-quantum-markedLight font-bold" />
+        <span>by step angle</span>
+        <MathView math={`\\theta = ${(theta * 180 / Math.PI).toFixed(1)}^\\circ`} className="text-slate-300 font-bold" />
+      </div>
 
       <div className="flex flex-col sm:flex-row items-center justify-around gap-6 pt-2">
         <div className="relative">
@@ -111,29 +118,33 @@ export const GeometricRotation2D: React.FC = () => {
         </div>
 
         <div className="space-y-3 font-mono text-xs w-full sm:w-64 bg-slate-50 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
-          <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
-            <span className="text-slate-400">Angle (rad):</span>
-            <span className="font-bold text-ink-light dark:text-ink-dark">{alphaK.toFixed(4)} rad</span>
+          <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-2">
+            <span className="text-slate-400 flex items-center gap-1">
+              Angle <MathView math="\phi_k" />:
+            </span>
+            <span className="font-bold text-ink-light dark:text-ink-dark">
+              <MathView math={`${alphaK.toFixed(3)}\\text{ rad}`} />
+            </span>
           </div>
 
-          <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
-            <span className="text-slate-400">Unmarked Component:</span>
+          <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-2">
+            <span className="text-slate-400">Unmarked Proj:</span>
             <span className="font-bold text-slate-700 dark:text-slate-300">
-              cos({(alphaK * 180 / Math.PI).toFixed(0)}°) = {Math.cos(alphaK).toFixed(3)}
+              <MathView math={`\\cos(${ (alphaK * 180 / Math.PI).toFixed(0) }^\\circ) = ${Math.cos(alphaK).toFixed(3)}`} />
             </span>
           </div>
 
-          <div className="flex justify-between border-b border-slate-200 dark:border-slate-800 pb-2">
-            <span className="text-slate-400">Target Component:</span>
+          <div className="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-2">
+            <span className="text-slate-400">Target Proj:</span>
             <span className="font-bold text-quantum-marked dark:text-quantum-markedLight">
-              sin({(alphaK * 180 / Math.PI).toFixed(0)}°) = {Math.sin(alphaK).toFixed(3)}
+              <MathView math={`\\sin(${ (alphaK * 180 / Math.PI).toFixed(0) }^\\circ) = ${Math.sin(alphaK).toFixed(3)}`} />
             </span>
           </div>
 
-          <div className="flex justify-between pt-1">
-            <span className="text-slate-400">Success Probability:</span>
+          <div className="flex justify-between items-center pt-1">
+            <span className="text-slate-400">Success Rate:</span>
             <span className="font-bold text-quantum-simulated dark:text-quantum-simulatedLight text-sm">
-              {(result.theoreticalProb * 100).toFixed(1)}%
+              <MathView math={`${(result.theoreticalProb * 100).toFixed(1)}\\%`} />
             </span>
           </div>
         </div>
