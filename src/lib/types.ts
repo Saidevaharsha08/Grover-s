@@ -80,6 +80,7 @@ export interface BenchmarkRow {
   theoreticalMaxProb: number;
   classicalAvgQueries: number;  // (N + 1) / (M + 1) or N / (2M)
   speedupFactor: number;        // classical / quantum
+  sdsScore: number;             // Search Difficulty Score (0.0 to 1.0)
 }
 
 export interface SavedExperiment {

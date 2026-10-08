@@ -146,6 +146,12 @@ export const BenchmarkTable: React.FC = () => {
                   <ArrowUpDown className="w-3 h-3 opacity-60" />
                 </div>
               </th>
+              <th className="py-2.5 px-3 cursor-pointer hover:text-slate-200" onClick={() => handleSort('sdsScore')}>
+                <div className="flex items-center gap-1">
+                  <span>SDS Score</span>
+                  <ArrowUpDown className="w-3 h-3 opacity-60" />
+                </div>
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
@@ -160,6 +166,11 @@ export const BenchmarkTable: React.FC = () => {
                 <td className="py-2.5 px-3">
                   <span className="px-2 py-0.5 rounded bg-quantum-simulated/15 text-quantum-simulated dark:text-quantum-simulatedLight font-bold">
                     {row.speedupFactor}x
+                  </span>
+                </td>
+                <td className="py-2.5 px-3">
+                  <span className="px-2 py-0.5 rounded bg-purple-500/15 text-purple-600 dark:text-purple-400 font-extrabold border border-purple-500/20">
+                    {row.sdsScore !== undefined ? row.sdsScore.toFixed(2) : '0.25'}
                   </span>
                 </td>
               </tr>

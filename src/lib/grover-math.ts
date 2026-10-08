@@ -349,6 +349,13 @@ export function generateBenchmarkSuite(): BenchmarkRow[] {
     const quantumQueries = Math.max(1, optimalK);
     const speedup = Math.round((classicalQueries / quantumQueries) * 100) / 100;
 
+    // Search Difficulty Score (SDS) calculation: w1=0.35, w2=0.35, w3=0.30
+    const nNorm = (cfg.numQubits - 2) / 2; // (numQubits - 2) / (4 - 2)
+    const nmRatio = totalStates / cfg.markedCount;
+    const nmNorm = Math.min(1.0, (nmRatio - 1) / 15);
+    const noiseNorm = Math.min(1.0, (1 - maxProb) / 0.5);
+    const sdsScore = Math.round((0.35 * nNorm + 0.35 * nmNorm + 0.30 * noiseNorm) * 100) / 100;
+
     return {
       id: `${cfg.numQubits}q-m${cfg.markedCount}`,
       numQubits: cfg.numQubits,
@@ -360,6 +367,7 @@ export function generateBenchmarkSuite(): BenchmarkRow[] {
       theoreticalMaxProb: Math.round(maxProb * 10000) / 10000,
       classicalAvgQueries: Math.round(classicalQueries * 100) / 100,
       speedupFactor: speedup,
+      sdsScore: Math.max(0.12, sdsScore),
     };
   });
 }
